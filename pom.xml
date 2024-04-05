@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.3</version>
+		<relativePath/>
+	</parent>
+	<groupId>io.reflectoring</groupId>
+	<artifactId>spring-microservices-architectures</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>spring-microservices-architectures</name>
+	<description>Spring Boot microservice to demonstrate the advantages of Reactive Architecture over simple blocking architecture</description>
+
+	 <properties>
+        <java.version>17</java.version>
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
+    </properties>
+	
+	<modules>
+		<module>config-service</module>
+        <module>discovery-service</module>
+		<module>gateway-service</module>
+        
+        <module>proactive-account-management-service</module>
+        <module>proactive-banking-service</module>
+        <module>proactive-reporting-service</module>
+        <module>proactive-user-notification-service</module>
+		
+		<module>reactive-account-management-service</module>
+        <module>reactive-banking-service</module>
+        <module>reactive-reporting-service</module>
+        <module>reactive-user-notification-service</module>
+    </modules>
+
+	<dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
