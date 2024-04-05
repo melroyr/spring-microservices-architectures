@@ -1,0 +1,32 @@
+server:
+  port: 8083
+
+# Configure Spring specific properties
+spring:
+  
+  cloud:
+    config:
+      enabled:
+        false
+
+  application:
+    name: reporting-service
+
+  # Enable/Disable hot swapping
+  devtools:
+    restart:
+      enabled: true
+      log-condition-evaluation-delta: false
+
+  # Datasource Configurations
+  data:
+    mongodb:
+      authentication-database: admin
+      uri: mongodb://localhost:27017/proactive
+      database: proactive
+
+eureka:
+  client:
+    service-url:
+      defaultZone:
+        http://localhost:8061/eureka

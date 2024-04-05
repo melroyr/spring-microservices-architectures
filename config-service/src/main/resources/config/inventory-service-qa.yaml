@@ -1,0 +1,11 @@
+spring:
+  data:
+    mongodb: 
+        # uri: mongodb://root:generic@localhost:27017/inventorydb?authSource=admin
+        host: localhost
+        port: 27017
+        username: root
+        password: generic
+        authentication-database: admin
+        database: inventory_test_db
+
