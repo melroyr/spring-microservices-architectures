@@ -3,16 +3,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.3</version>
-		<relativePath/>
+		<groupId>io.reflectoring</groupId>
+		<artifactId>spring-microservices-architectures</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<!-- <relativePath/> -->
 	</parent>
 	<groupId>io.reflectoring</groupId>
-	<artifactId>spring-microservices-architectures</artifactId>
+	<artifactId>spring-reactive-architecture</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>spring-microservices-architectures</name>
+	<name>spring-reactive-architecture</name>
 	<description>Spring Boot microservice to demonstrate the advantages of Reactive Architecture over simple blocking architecture</description>
 
 	 <properties>
@@ -21,13 +21,10 @@
     </properties>
 	
 	<modules>
-		<module>config-service</module>
-		<module>discovery-service</module>
-		<module>gateway-service</module>
-		<!--
-        <module>spring-proactive-architecture</module>
-		<module>spring-reactive-architecture</module>
-		-->
+		<module>reactive-account-management-service</module>
+        <module>reactive-banking-service</module>
+        <module>reactive-reporting-service</module>
+        <module>reactive-user-notification-service</module>
     </modules>
 
 	<dependencyManagement>
