@@ -37,16 +37,6 @@ services:
       - KAFKA_CLUSTERS_0_NAME=local
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
       - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
- reactive-banking-service:
-    build: ./reactive-banking-service
-    ports:
-      - "8080:8080"
-    depends_on:
-      - zookeeper
-      - kafka
-      - reactive-user-notification-service
-      - reactive-reporting-service
-      - reactive-account-management-service
  reactive-user-notification-service:
     build: ./reactive-user-notification-service
     ports:
