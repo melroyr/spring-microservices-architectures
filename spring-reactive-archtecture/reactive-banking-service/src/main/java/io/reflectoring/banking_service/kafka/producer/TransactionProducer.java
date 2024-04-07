@@ -20,7 +20,7 @@ public class TransactionProducer {
 
     public void sendMessage(Transaction transaction) {
         Message<Transaction> msg = MessageBuilder.withPayload(transaction)
-                .setHeader(KafkaHeaders.MESSAGE_KEY, transaction.getTransactionId().getBytes(StandardCharsets.UTF_8))
+                .setHeader(KafkaHeaders.KEY, transaction.getTransactionId().getBytes(StandardCharsets.UTF_8))
                 .build();
         log.info("Transaction processed to dispatch: {}; Message dispatch successful: {}",
                 msg,

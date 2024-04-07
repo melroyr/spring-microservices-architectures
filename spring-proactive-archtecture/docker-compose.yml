@@ -1,7 +1,21 @@
 services:
-  mongodb:
-    image: mongo:5.0
+  proactive-banking-service:
+    build: ./proactive-banking-service
     ports:
-      - 27017:27017
-    volumes:
-      - ~/apps/mongo:/data/db
+      - "8080:8080"
+    depends_on:
+      - proactive-user-notification-service
+      - proactive-reporting-service
+      - proactive-account-management-service
+  proactive-user-notification-service:
+    build: ./proactive-user-notification-service
+    ports:
+      - "8081:8081"
+  proactive-reporting-service:
+    build: ./proactive-reporting-service
+    ports:
+      - "8082:8082"
+  proactive-account-management-service:
+    build: ./proactive-account-management-service
+    ports:
+      - "8083:8083"
