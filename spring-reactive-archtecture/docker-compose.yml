@@ -1,13 +1,17 @@
 version: '3'
 services:
   zookeeper:
-    image: wurstmeister/zookeeper
+    image: confluentinc/cp-zookeeper:latest
     ports:
       - "2181:2181"
+    networks:
+      - mynet
   kafka:
-    image: wurstmeister/kafka
+    image: confluentinc/cp-kafka:latest
     ports:
       - "9092:9092"
+    networks:
+      - mynet
     environment:
       KAFKA_ADVERTISED_HOST_NAME: 10.204.106.55
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -22,6 +26,8 @@ services:
     container_name: kafka-ui
     ports:
       - "8090:8080"
+    networks:
+      - mynet
     depends_on:
       - zookeeper
       - kafka
@@ -34,6 +40,8 @@ services:
     build: ./reactive-banking-service
     ports:
       - "8080:8080"
+    networks:
+      - mynet
     depends_on:
       - zookeeper
       - kafka
@@ -51,6 +59,8 @@ services:
     build: ./reactive-reporting-service
     ports:
       - "8082:8082"
+    networks:
+      - mynet
     depends_on:
       - zookeeper
       - kafka
@@ -58,6 +68,8 @@ services:
     build: ./reactive-account-management-service
     ports:
       - "8083:8083"
+    networks:
+      - mynet
     depends_on:
       - zookeeper
       - kafka
