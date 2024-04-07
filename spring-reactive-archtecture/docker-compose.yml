@@ -1,5 +1,21 @@
 services:
- reactive-user-notification-service:
+  reactive-banking-service:
+    build: ./reactive-banking-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - reactive-user-notification-service
+      - reactive-reporting-service
+      - reactive-account-management-service
+  reactive-user-notification-service:
     build: ./reactive-user-notification-service
     ports:
       - "8081:8081"
+  reactive-reporting-service:
+    build: ./reactive-reporting-service
+    ports:
+      - "8082:8082"
+  reactive-account-management-service:
+    build: ./reactive-account-management-service
+    ports:
+      - "8083:8083"
