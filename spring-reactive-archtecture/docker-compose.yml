@@ -1,25 +1,34 @@
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
-    ports:
-      - "2181:2181"
-    networks:
-      - mynet
-  kafka:
-    image: confluentinc/cp-kafka:latest
-    ports:
-      - "9092:9092"
+    container_name: zookeeper
     networks:
       - mynet
     environment:
-      KAFKA_ADVERTISED_HOST_NAME: 10.204.106.55
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 2181:2181
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    networks:
+      - mynet
+    ports:
+      - 9092:9092
+      - 29092:29092
+    environment:
+      KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
-      ALLOW_PLAINTEXT_LISTENER: "yes"
-      KAFKA_CFG_LOG_DIRS: /tmp/kafka_mounts/logs
-      KAFKA_CREATE_TOPICS: "transactions:1:2"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    healthcheck:
+      test: [ "CMD", "bash", "-c", "unset" , "JMX_PORT" ,";" ,"kafka-topics.sh","--zookeeper","zookeeper:2181","--list" ]
+
   kafka-ui:
     image: provectuslabs/kafka-ui
     container_name: kafka-ui
